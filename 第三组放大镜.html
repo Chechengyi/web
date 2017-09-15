@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>放大镜效果</title>
+	<style type="text/css">
+		body{
+			background-color: #000;
+		}
+		#box{
+			position: relative;
+			width: 500px;
+			height: 500px;
+			background: url('timg (1).jpg') no-repeat 0 0;
+			background-size: 500px;
+			margin: 100px auto;
+		}
+		#a{
+			position: absolute;
+			width: 190px;
+			height: 190px;
+			background: #fff;
+			display: none;
+			left: 0;
+			top: 0;
+			border-radius: 50%;
+			border: 5px solid #999;
+			background: url('timg (1).jpg') no-repeat 0 0;
+			background-size: 1000px;
+		}
+		#mask{
+			position: absolute;
+			width: 500px;
+			height: 500px;
+			left: 0;
+			top: 0;
+			background: transparent;
+			z-index: 100;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="a"></div>
+		<div id="mask"></div>
+	</div>
+	<script type="text/javascript">
+		window.addEventListener('DOMContentLoaded',function(){
+
+			// var fuDOM = document.getElementById('box');
+			var ziDOM = document.getElementById('a'); //
+			var mask = document.getElementById('mask'); //
+			mask.addEventListener('mouseenter',function a(e){
+				ziDOM.style.display = 'block';
+				listenMouse();
+			},false);
+
+			function listenMouse(){
+				
+				mask.addEventListener('mousemove',function(e){
+					ziDOM.style.left = e.offsetX - 100 + 'px';
+					ziDOM.style.top = e.offsetY - 100 + 'px';
+					// ziDOM.style.backgroundPosition = (-2*e.offsetX)+100+'px '+(-2*e.offsetY)+100+'px';
+					ziDOM.style.backgroundPositionX = (-2*e.offsetX)+100+'px';
+					ziDOM.style.backgroundPositionY = (-2*e.offsetY)+100+'px';
+
+				},false);
+			}
+			mask.addEventListener('mouseleave',function(){
+				console.log(1);
+				ziDOM.style.display = 'none';
+				mask.removeEventListener('mouseenter',a,false);
+			},false);
+
+		},false);
+	</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>时钟</title>
+	<style type="text/css">
+		*{
+			margin: 0; padding: 0;
+		}
+		body{
+			background-color: black;
+		}
+		ul,li{ list-style: none  }
+		#box{
+			position: relative;
+			width: 300px;
+			height: 300px;
+			background-color: #fff;
+			margin: 100px auto;
+			border-radius: 50%;
+			border: 5px solid #ccc;
+		}
+		#dian{
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			background-color: black;
+			border-radius: 50%;
+			left: 145px;
+			top: 145px;
+		}
+		#kedu li{
+			position: absolute;
+			width: 2px;
+			border-bottom: 6px solid black;
+			height: 135px;
+			left: 150px;
+			top: 150px;
+			transform-origin: 50% 0%;
+			background-color: transparent;
+		}
+		#box .lang{
+			border-bottom: 12px solid red;
+			height: 129px;
+		}
+		
+		#shi{
+			 position: absolute;
+            top: 147px;
+            left: 147px;
+            width: 6px;
+            height: 110px;
+            border-radius: 4px;
+            background-color: blue;
+            /*transform-origin: 50% 0%;*/
+            transform-origin: top;
+		}
+		#fen{
+			position: absolute;
+            top: 148px;
+            left: 148px;
+            width: 4px;
+            height: 120px;
+            border-radius: 4px;
+            background-color: forestgreen;
+            /*transform-origin: 50% 0%;*/
+            transform-origin: top;
+		}
+		#miao{
+			 position: absolute;
+            top: 149px;
+            left: 149px;
+            width: 2px;
+            height: 130px;
+            border-radius: 4px;
+            background-color: chocolate;
+            /*transform-origin: 50% 0%;*/
+            transform-origin: top;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="dian"></div>
+		<div id="shi"></div>
+		<div id="fen"></div>
+		<div id="miao"></div>
+		<ul id="kedu"></ul>
+	</div>
+	<script type="text/javascript">
+		window.addEventListener('DOMContentLoaded',function(){
+
+			var parentDom = document.getElementById('box');
+			var dianDom = document.getElementById('dian');
+			var keduDom = document.getElementById('kedu');
+			var mDom = document.getElementById('miao');
+			var fDom = document.getElementById('fen');
+			var sDom = document.getElementById('shi');
+		
+			for ( var i = 0; i<=60; i++ ) {
+				var dom = document.createElement('li');
+				dom.className = (i%5===0)?'lang':'';
+				dom.style.transform="rotateZ("+i*6+"deg)";
+				keduDom.appendChild(dom);
+			}
+			
+			function starMove () {
+				var time = new Date();
+				var s = time.getSeconds();
+	
+       			 mDom.style.transform="rotateZ("+(s*6+180)+"deg)";
+
+        		var m = time.getMinutes()+s/60;
+       			 fDom.style.transform="rotateZ("+(m*6+180)+"deg)";
+
+        		var h = time.getHours()+m/60;
+       		 	sDom.style.transform="rotateZ("+(h*30+180)+"deg)";
+				
+			}
+
+			var a = setInterval(function(){
+				starMove();
+			},1000);
+
+
+		},false);
+	</script>
+</body>
+</html>

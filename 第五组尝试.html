@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>正弦运动</title>
+	<style type="text/css">
+		body{
+			background-color: black;
+		}
+		#box{
+			position: relative;
+			width: 1100px;
+			height: 600px;
+			background-color: #fff;
+			margin: 0 auto;
+		}
+		.ball{
+			position: absolute;
+			left: 0;
+			top: 300px;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		
+	</div>
+	<script type="text/javascript">
+		window.addEventListener('DOMContentLoaded',function(){
+			
+			var parent = document.getElementById('box');
+			var ball = {
+				x: 0,
+				y: 300,
+				vx: 2,
+				vy: 25,
+				g: 0
+			}
+			function getColor(){
+				var r = Math.round(Math.random()*255);
+				var g = Math.round(Math.random()*255);
+				var b = Math.round(Math.random()*255);
+				return 'rgb('+r+','+g+','+b+')';
+			}
+			function appendFirst(parent,son){
+				if( parent.children.length!== 0 ){
+					var firstDom = parent.firstElementChild;
+					parent.insertBefore(son,firstDom);
+				} else{
+					parent.appendChild(son);
+				}
+
+			}
+			var timer = setInterval(function(){
+				ball.x = ball.x+ball.vx;
+				ball.y = ball.y+ball.vy;
+				// ball.vy = ball.vy + ball.g;
+
+				if ( ball.x >= 1100 ) {
+					ball.vx = -ball.vx;
+				}
+				if( ball.y < 0 ){
+					ball.vy = -ball.vy
+				}
+				if( ball.y >= 600-30 ) {
+					ball.y = 600-30;
+					ball.vy = -ball.vy;
+					ball.a = -ball.a;
+				}
+
+
+				var dom = document.createElement('div');
+				dom.className = 'ball';
+				dom.style.left = ball.x+'px';
+				dom.style.top = ball.y+'px';
+				dom.style.backgroundColor = getColor();
+				appendFirst(parent,dom);
+				if ( parent.children.length >= 45 ) {
+					parent.removeChild(parent.children[parent.children.length-1])
+					console.log(5);
+				}
+				dom = null;
+			},50);
+			
+
+		},false);
+	</script>
+</body>
+</html>

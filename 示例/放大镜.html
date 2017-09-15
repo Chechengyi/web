@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>放大镜</title>
+	<style type="text/css">
+		body{
+			background-color: #ccc;
+		}
+		#box{
+			width: 500px;
+			height: 500px;
+			position: relative;
+			background-color: black;
+			margin: 0 auto;
+			background: url('u=1731440441,3191492590&fm=26&gp=0.jpg');
+			background-size: 500px;
+		}
+		#a{
+			width: 200px;
+			height: 200px;
+			position: absolute;
+			background-color: #fff;
+			border-radius: 50%;
+			display: none;
+			background: url('u=1731440441,3191492590&fm=26&gp=0.jpg') no-repeat;
+			background-size:1000px;
+		}
+		#mask{
+			position: absolute;
+			width: 500px;
+			height: 500px;
+			left: 0;
+			right: 0;
+			background: transparent;
+			z-index: 1000;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="a"></div>
+		<div id="mask"></div>
+	</div>
+	<script type="text/javascript">
+		window.addEventListener('DOMContentLoaded',function(e){
+			var fuDom = document.getElementById('box');
+			var fdDom = document.getElementById('a');
+			var maskDom = document.getElementById('mask');
+
+			maskDom.addEventListener('mouseenter',function(e){
+				fdDom.style.display = 'block';
+				starMove();
+			},false); 
+			function starMove(){
+				maskDom.addEventListener('mousemove',function(e){
+					// console.log(e.offsetX);
+					// console.log(e.offsetY);
+					fdDom.style.left = e.offsetX-100+'px';
+					fdDom.style.top = e.offsetY-100+'px';
+					fdDom.style.backgroundPositionX = (-2*e.offsetX)+100+'px';
+					fdDom.style.backgroundPositionY = (-2*e.offsetY)+100+'px';
+				},false);
+			}
+			maskDom.addEventListener('mouseleave',function(){
+				console.log('1')
+					fdDom.style.display = 'none';
+			},false);
+
+		},false);
+	</script>
+</body>
+</html>
